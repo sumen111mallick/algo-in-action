@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+
+import Grid from "@mui/material/Grid";
+import AlgoChooser from "./components/AlgoChooser";
+import AlgoInAction from './components/AlgoInAction';
 
 function App() {
+  const algoObject = {
+    algo:'qs',
+    element:0
+  }
+  const [getAlgo, setAlgo] = React.useState(algoObject);
+
+  const setAlgoObject = (algo, element) => {
+    setAlgo((previosState)=>{return {...previosState, algo:algo, element:element}});
+
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <Grid container spacing={2} mt={3}>
+            <AlgoChooser setAlgoObject={setAlgoObject} />
+            <AlgoInAction getAlgo={getAlgo} />
+        </Grid>
+      </main>
     </div>
   );
 }
